@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
 @font-face {
   font-family: "LexendDeca-Black";
@@ -56,4 +58,48 @@
   --font-LexendDeca-Light: "LexendDeca-Light", "sans-serif";
   --font-LexendDeca-Medium: "LexendDeca-Medium", "sans-serif";
   --font-LexendDeca-Regular: "LexendDeca-Regular", "sans-serif";
+}
+
+/* TUS FUENTES (manteniendo tu estructura actual) */
+@font-face {
+  font-family: "LexendDeca-Black";
+  src: url("./assets/fonts/LexendDeca-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LexendDeca-Bold";
+  src: url("./assets/fonts/LexendDeca-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* REGISTRO DE FUENTES PARA TAILWIND */
+@layer {
+  :root {
+    --font-lexend: "LexendDeca-Regular", sans-serif;
+    --font-lexend-bold: "LexendDeca-Bold", sans-serif;
+  }
+
+  html {
+    font-family: var(--font-lexend);
+  }
+}
+
+/* VARIABLES UNAH */
+:root {
+  --unah-blue: #0056A4;
+  --unah-yellow: #FFD700;
+}
+
+/* CLASES PERSONALIZADAS */
+.bg-unah-blue {
+  background-color: var(--unah-blue);
+}
+
+.text-unah-blue {
+  color: var(--unah-blue);
 }
