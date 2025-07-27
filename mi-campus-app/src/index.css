@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 @font-face {
   font-family: "LexendDeca-Black";
@@ -77,29 +78,64 @@
   font-display: swap;
 }
 
-/* REGISTRO DE FUENTES PARA TAILWIND */
-@layer {
-  :root {
-    --font-lexend: "LexendDeca-Regular", sans-serif;
-    --font-lexend-bold: "LexendDeca-Bold", sans-serif;
-  }
 
-  html {
-    font-family: var(--font-lexend);
-  }
+/* Estilos base para la pagina  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* VARIABLES UNAH */
 :root {
-  --unah-blue: #0056A4;
-  --unah-yellow: #FFD700;
+  /* Colores oficiales UNAH */
+  --unah-blue: #003b74;
+  --unah-yellow: #EBB730;
+  --unah-white: #FFFFFF;
+  --unah-gray: #F1F1F1;
+  --unah-dark: #333333;
 }
 
-/* CLASES PERSONALIZADAS */
-.bg-unah-blue {
+
+/* Navbar UNAH funciona  */
+.navbar-unah {
   background-color: var(--unah-blue);
+  justify-content: space-between;
+  align-items: center;
 }
 
-.text-unah-blue {
-  color: var(--unah-blue);
+/* boton de incio*/
+.login-btn {
+  height: calc(50% - 4px);
+  padding: 4px 12px; 
+  margin-left: 10px;
+  font-family: "LexendDeca-Bold"; 
+  font-size: 0.875rem; 
+  font-weight: 500; 
+  color: #003b74; 
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px; 
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+   align-self: center;
+  
+  /* Efectos interactivos sutiles */
+  &:hover {
+    background-color: #e1e6eb; 
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    background-color: #f1f5f9;
+  }
+
+  /* Versión móvil */
+  @media (max-width: 768px) {
+    margin: 6px 0 0;
+    width: 100%;
+    padding: 6px 16px;
+  }
 }
