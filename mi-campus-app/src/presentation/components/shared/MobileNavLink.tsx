@@ -11,7 +11,7 @@ export const MobileNavLink = ({ icon, text, active = false, to }: Props) => {
     return (
         <Link
             to={to}
-            className={`flex items-center px-3 py-2 rounded-md text-base font-LexendDeca-Medium
+            className={`flex items-center px-3 py-2 rounded-md text-base font-LexendDeca-Medium text-decoration-none
                 ${active ?
                     "bg-blue-700 text-white" :
                     "text-blue-100 hover:bg-blue-500"

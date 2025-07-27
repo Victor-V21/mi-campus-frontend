@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export const authcampusApi = axios.create({
+export const miCampusApi= axios.create({
 baseURL: import.meta.env.VITE_API_URL
 });

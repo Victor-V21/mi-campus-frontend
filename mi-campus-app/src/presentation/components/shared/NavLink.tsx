@@ -12,7 +12,7 @@ export const NavLink = ({ icon, text, active = false, to }: Props) => {
     return (
         <Link
             to={to}
-            className={`flex items-center px-3 py-2 text-sm font-LexendDeca-Medium
+            className={`flex items-center px-3 py-2 text-sm font-LexendDeca-Medium text-decoration-none
             ${active ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"}`} >
 
             {icon && (
