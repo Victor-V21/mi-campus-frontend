@@ -1,4 +1,4 @@
-import { Globe, Home, Menu, Users,  UserCircle, MapPin } from "lucide-react";
+import { Globe, Home, Menu, Users,  UserCircle, MapPin, MessageCircleIcon, NotebookIcon } from "lucide-react";
 import { NavLink } from "../shared/NavLink";
 import { useState } from "react";
 import { MobileNavLink } from "../shared/MobileNavLink";
@@ -40,11 +40,9 @@ export const Navbar = () => {
                             <NavLink to="/" active={isActive("/")} text="Inicio" icon={<Home size={18} />} />
                             <NavLink to="/eventos" active={isActive("/eventos")} text="Eventos" icon={<Globe size={18} />} />
                             <NavLink to="/mapa" active={isActive("/Mapa")} text="Mapa" icon={<MapPin size={18} />} />
+                            <NavLink to="/chatbot" active={isActive("/chatbot")} text="ChatBot" icon={<MessageCircleIcon size={18} />} />
+                            <NavLink to="/notification" active={isActive("/notification")} text="Notificaciones" icon={<NotebookIcon size={18} />} />
                             <NavLink to="/perfil" active={isActive("/perfil")} text="Perfil" icon={<UserCircle size={18} />} />
-                            <button className="login-btn font-LexendDeca-Bold">
-                                Iniciar Sesión
-                                </button>
-
                         </div>
                         {/* Botón de menu móvil */}
                         <div className="md:hidden flex items-center">
@@ -67,10 +65,9 @@ export const Navbar = () => {
                             <MobileNavLink to="/" active={isActive("/")} icon={<Home size={18} />} text="Inicio" />
                             <MobileNavLink to="/eventos" active={isActive("/eventos")} icon={<Globe size={18} />} text="Eventos" />
                             <MobileNavLink to="/mapa" active={isActive("/mapa")} icon={<Users size={18} />} text="Mapa" />
+                            <MobileNavLink to="/chatbot" active={isActive("/chatbot")} icon={<MessageCircleIcon size={18} />} text="ChatBot" />
+                            <MobileNavLink to="/notification" active={isActive("/notification")} icon={<NotebookIcon size={18} />} text="Notificaciones" />
                             <MobileNavLink to="/perfil" active={isActive("/perfil")} icon={<UserCircle size={18} />} text="Perfil" />
-                            <button className="login-btn font-LexendDeca-Bold">
-                                Iniciar Sesión
-                                </button>
                         </div>
                     </div>
                 )}

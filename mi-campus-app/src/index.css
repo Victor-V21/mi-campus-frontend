@@ -101,6 +101,7 @@
   background-color: var(--unah-blue);
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
 }
 
 /* boton de incio*/
@@ -118,7 +119,7 @@
   cursor: pointer;
   transition: all 0.15s ease;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-   align-self: center;
+  align-self: center;
   
   /* Efectos interactivos sutiles */
   &:hover {
@@ -138,4 +139,275 @@
     width: 100%;
     padding: 6px 16px;
   }
+}
+
+/* Estilos para las tarjetas de servicios académicos */
+.dashboard-card {
+  background-color: var(--unah-white);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 59, 116, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px rgba(0, 59, 116, 0.1);
+  border-color: rgba(0, 59, 116, 0.2);
+}
+
+.card-icon-container {
+  background-color: rgba(0, 59, 116, 0.1);
+  border-radius: 0.5rem;
+  color: var(--unah-blue);
+  padding: 0.75rem;
+  margin-right: 1rem;
+}
+
+.card-title {
+  color: var(--unah-blue);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-LexendDeca-Bold);
+}
+
+.card-description {
+  color: var(--unah-dark);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.card-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--unah-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  font-family: var(--font-LexendDeca-Medium);
+  margin-top: 1rem;
+}
+
+.card-button:hover {
+  background-color: #002a5c; /* Un azul UNAH más oscuro */
+}
+
+/* Estilos para el título de sección */
+.section-title {
+  font-size: 1.875rem;
+  color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Bold);
+  border-bottom: 2px solid var(--unah-yellow);
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+/* Grid responsive */
+.services-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Contenedor principal */
+.page-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Estilos para el Login */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f7ff 0%, #f8f9fa 100%);
+  font-family: var(--font-LexendDeca-Regular);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 86, 179, 0.1), 
+  0 10px 10px -5px rgba(0, 86, 179, 0.04);
+  overflow: hidden;
+  margin: 1rem;
+  border: 1px solid rgba(0, 59, 116, 0.1);
+}
+
+.login-header {
+  background: var(--unah-blue);
+  color: white;
+  padding: 1.75rem;
+  text-align: center;
+}
+
+.login-header h1 {
+  font-family: var(--font-LexendDeca-Bold);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.login-header p {
+  font-family: var(--font-LexendDeca-Light);
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0;
+  opacity: 0.9;
+}
+
+.login-body {
+  padding: 2rem;
+}
+
+.login-title {
+  color: var(--unah-blue);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 1.25rem;
+  position: relative;
+}
+
+.login-title::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 0.2rem;
+  background-color: var(--unah-yellow);
+  margin: 0.75rem auto 0;
+}
+
+.login-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 0.875rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 1px solid rgba(0, 59, 116, 0.2);
+  border-radius: 0.5rem;
+  font-family: var(--font-LexendDeca-Regular);
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  background-color: rgba(0, 59, 116, 0.03);
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--unah-blue);
+  box-shadow: 0 0 0 3px rgba(0, 59, 116, 0.1);
+  background-color: white;
+}
+
+.forgot-link {
+  display: block;
+  text-align: right;
+  color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 0.8125rem;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 100%;
+  background: var(--unah-blue);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #002a5c;
+}
+
+.divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: #777;
+  font-size: 0.875rem;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  border-bottom: 1px solid #eee;
+}
+
+.divider::before {
+  right: 55%;
+}
+
+.divider::after {
+  left: 55%;
+}
+
+.register-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.register-btn:hover {
+  border-color: var(--unah-blue);
+  background-color: #f5f9ff;
 }
