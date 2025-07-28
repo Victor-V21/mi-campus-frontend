@@ -17,24 +17,23 @@ export const LoginPage = () => {
           <form className="login-form">
             {/* Email */}
             <div className="form-group relative">
-              <label htmlFor="email">Correo institucional</label>
-              <div className="absolute left-3 top-3">
-                <Mail className="h-5 w-5 text-unah-blue" />
-              </div>
+             <div>
+                {<Mail size={18} className="h-5 w-5 text-unah-blue " />} 
+                 <label htmlFor="email">Correo institucional
+              </label>
+             </div>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="tu.correo@unah.edu.hn"
+                placeholder="tu.correo@unah.hn"
               />
             </div>
 
             {/* Contraseña */}
             <div className="form-group relative">
-              <label htmlFor="password">Contraseña</label>
-              <div className="absolute left-3 top-3">
-                <Lock className="h-5 w-5 text-unah-blue" />
-              </div>
+                {<Lock size={18} className="h-5 w-5 text-unah-blue " />}
+              <label  htmlFor="password">Contraseña</label>
               <input
                 id="password"
                 name="password"
