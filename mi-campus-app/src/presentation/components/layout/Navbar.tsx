@@ -1,13 +1,15 @@
-import { Globe, Home, Menu, UserCircle, MapPin, MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { Globe, Home, Menu, UserCircle, MapPin, MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import { NavLink } from "../shared/NavLink";
 import { useState } from "react";
 import { MobileNavLink } from "../shared/MobileNavLink";
 import { Outlet, useLocation } from "react-router";
+import { useAuthStore } from "../../stores/authStore";
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const location = useLocation();
+    const { logout } = useAuthStore();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -58,6 +60,13 @@ export const Navbar = () => {
                         <MobileNavLink to="/chatbot" active={isActive("/chatbot")} icon={<MessageCircleIcon size={18} />} text="ChatBot" />
                         <MobileNavLink to="/notification" active={isActive("/notification")} icon={<NotebookIcon size={18} />} text="Notificaciones" />
                         <MobileNavLink to="/perfil" active={isActive("/perfil")} icon={<UserCircle size={18} />} text="Perfil" />
+                        <button
+                            type="button" 
+                            onClick={logout}
+                            className="w-full text-left flex items-center px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
+                            <LogOut size={18}/>
+                            <span className="ml-2">Salir</span>
+                        </button>
                     </div>
                 )}
             </nav>
@@ -112,9 +121,16 @@ export const Navbar = () => {
                             text={isCollapsed ? "" : "Perfil"} 
                             icon={<UserCircle size={20} />}
                         />
+                        <button
+                    type="button"
+                    onClick={logout}
+                    className="flex items-center w-full gap-2 px-4 py-2 text-white hover:bg-blue-700 transition-colors"
+                    >
+                    <LogOut size={20} />
+                    {!isCollapsed && <span>Salir</span>}
+                </button>
                     </nav>
                 </div>
-
                 {/* Contenido principal */}
                 <div className="flex-1 bg-gray-100 overflow-y-auto">
                     <div className="p-4">
