@@ -2,8 +2,6 @@
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'bootstrap/dist/css/bootstrap.min.css';
-
 @font-face {
   font-family: "LexendDeca-Black";
   src: url("./assets/fonts/LexendDeca-Black.ttf") format("truetype");
@@ -425,4 +423,270 @@
 .login-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+
+/* Estilos para el eventos*/
+
+.event-filter-buttons button {
+  transition: all 0.2s ease-in-out;
+  border-radius: 0.5rem;
+  font-family: var(--font-LexendDeca-Medium);
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--unah-blue);
+  background-color: transparent;
+  color: var(--unah-blue);
+  cursor: pointer;
+}
+
+.event-filter-buttons button:hover {
+  background-color: #f0f6ff;
+}
+
+.event-filter-buttons .active {
+  background-color: var(--unah-blue);
+  color: white;
+}
+
+.event-search-input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  transition: border 0.2s ease-in-out;
+  background-color: #f9fbfc;
+  font-family: var(--font-LexendDeca-Regular);
+}
+
+.event-search-input:focus {
+  outline: none;
+  border-color: var(--unah-blue);
+  box-shadow: 0 0 0 2px rgba(0, 59, 116, 0.2);
+  background-color: white;
+}
+
+.event-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 59, 116, 0.15);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  border-color: rgba(0, 59, 116, 0.3);
+}
+
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Bold);
+  margin-bottom: 0.25rem;
+}
+
+.event-description {
+  color: #4b5563;
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-LexendDeca-Regular);
+  line-height: 1.5;
+}
+
+.event-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  font-family: var(--font-LexendDeca-Regular);
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.event-info-title {
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.event-category {
+  background-color: var(--unah-yellow);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-LexendDeca-Medium);
+}
+
+.event-details-button {
+  margin-top: 1.25rem;
+  background-color: var(--unah-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-family: var(--font-LexendDeca-Medium);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.event-details-button:hover {
+  background-color: #002a5c;
+}
+
+.event-icon {
+  display: flex;
+  align-items: center;
+  color: var(--unah-blue);
+  gap: 0.5rem;
+}
+
+
+
+
+/* Estilos para el perfil */
+
+.profile-page {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.tab-container {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eee;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-buttons button {
+  background-color: #f3f4f6;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-buttons button.active {
+  background-color: #d9d6f9;
+  color: var(--unah-blue);
+}
+
+.tab-buttons button:hover {
+  background-color: #e0e7ff;
+}
+
+.tab-content {
+  margin-top: 1rem;
+}
+
+.tab-buttons .icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* Estilos cards de perfil */
+.profile-card {
+  width: 100%;
+  max-width: 360px;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  transition: transform 0.3s ease;
+  margin: auto;
+}
+
+.profile-card:hover {
+  transform: scale(1.02);
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #d0bdf4;
+}
+
+.avatar-fallback {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  margin: 0 auto 1rem auto;
+  border: 3px solid #d0bdf4;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  color: #333;
+}
+
+.profile-email,
+.profile-detail {
+  font-size: 0.95rem;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.badge-unah {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.75rem;
+  background-color: #c4e2e3;
+  color: #034c4c;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color:var(--unah-yellow);
 }

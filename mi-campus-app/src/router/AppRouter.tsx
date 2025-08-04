@@ -5,6 +5,8 @@ import { HomePage } from "../presentation/pages/home/HomePage"
 // import { useAuthStore } from "../presentation/stores/authStore"
 // import { ProfilePage } from "../presentation/pages/profile/ProfileHome"
 import { LoginPage } from "../presentation/pages/security/auth/LoginPage"
+import { ProfilePage } from "../presentation/pages/profile/ProfileHome"
+import { EventoPage } from "../presentation/pages/eventos/EventosPage"
 
 // export const AppRouter = () => {
 //     const {authenticated } = useAuthStore();
@@ -31,6 +33,8 @@ export const AppRouter = () => {
             <Routes>
                 <Route element={<Navbar />}>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path ="/eventos" element={<EventoPage />} />
                 </Route>
                     <Route path="/auth">
                     <Route path="login" element={ <LoginPage />} />
