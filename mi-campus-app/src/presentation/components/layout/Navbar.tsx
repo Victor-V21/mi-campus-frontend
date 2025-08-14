@@ -1,4 +1,4 @@
-import { Globe, Home, Menu, UserCircle, MapPin, MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { Globe, Home, Menu, UserCircle,  MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut,  Box } from "lucide-react";
 import { NavLink } from "../shared/NavLink";
 import { useState } from "react";
 import { MobileNavLink } from "../shared/MobileNavLink";
@@ -56,7 +56,7 @@ export const Navbar = () => {
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <MobileNavLink to="/" active={isActive("/")} icon={<Home size={18} />} text="Inicio" />
                         <MobileNavLink to="/eventos" active={isActive("/eventos")} icon={<Globe size={18} />} text="Eventos" />
-                        <MobileNavLink to="/mapa" active={isActive("/mapa")} icon={<MapPin size={18} />} text="Mapa" />
+                        <MobileNavLink to="/publication" active={isActive("/publication")} icon={<Box size={18} />} text="Publicaciones" />
                         <MobileNavLink to="/chatbot" active={isActive("/chatbot")} icon={<MessageCircleIcon size={18} />} text="ChatBot" />
                         <MobileNavLink to="/notification" active={isActive("/notification")} icon={<NotebookIcon size={18} />} text="Notificaciones" />
                         <MobileNavLink to="/perfil" active={isActive("/perfil")} icon={<UserCircle size={18} />} text="Perfil" />
@@ -105,10 +105,10 @@ export const Navbar = () => {
                                 icon={<Globe size={20} />}
                             />
                             <NavLink 
-                                to="/mapa" 
-                                active={isActive("/mapa")} 
-                                text={isCollapsed ? "" : "Mapa"} 
-                                icon={<MapPin size={20} />}
+                                to="/publicaciones" 
+                                active={isActive("/publication")} 
+                                text={isCollapsed ? "" : "Publicaciones"} 
+                                icon={<Box size={20} />}
                             />
                             <NavLink 
                                 to="/notification" 

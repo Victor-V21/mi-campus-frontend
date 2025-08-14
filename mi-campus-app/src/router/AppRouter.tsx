@@ -18,18 +18,22 @@ export const AppRouter = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             <Routes>
-                {/*<Route element={<PrivateRoute/>}>*/} 
+                {/* Ruta principal que redirige a la página de inicio */}
                 <Route path="/" element={<HomePage />} />
+
+                {/* Ruta protegida que requiere autenticación */}
+                 {/*<Route element={<PrivateRoute/>}> */} 
                     <Route element={<Navbar />}>
                     <Route path="/index" element={<IndexPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/eventos" element={<EventoPage />} />
                     <Route path="/mapa" element={<MapPage/>} />
                 </Route>
-                {/* <</Route>> */}
+                {/*Auth de login y registro */}
+              {/*</Route> */}  
                 <Route path="/auth">
-                    <Route path="login" element={authenticated ? <Navigate to="/" replace/> : <LoginPage />} />
-                    <Route path="register"element={authenticated ? <Navigate to="/" replace /> : <RegisterPage />}/>
+                    <Route path="login" element={authenticated ? <Navigate to="/index" replace/> : <LoginPage />} />
+                    <Route path="register"element={authenticated ? <Navigate to="/index" replace /> : <RegisterPage />}/>
                 </Route>
             </Routes>
         </div>
