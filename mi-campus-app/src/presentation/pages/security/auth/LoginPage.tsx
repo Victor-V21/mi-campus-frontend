@@ -88,22 +88,14 @@ export const LoginPage = () => {
                   </div>
                 )}
               </div>
-
-              {/* ¿Olvidaste tu contraseña? */}
               <Link to="/recuperar-contrasena" className="forgot-link">
                 ¿Olvidaste tu contraseña?
               </Link>
-
-              {/* Botón Ingresar */}
               <button type="submit" className="login-btn" disabled={formik.isSubmitting}>
                 Ingresar
               </button>
-
-              {/* Separador */}
               <div className="divider">o</div>
-
-              {/* Botón Registro */}
-              <Link to="/registro" className="register-btn">
+              <Link to="/auth/register" className="register-btn">
                 <UserPlus className="mr-2 h-4 w-4" />
                 Crear una cuenta nueva
               </Link>

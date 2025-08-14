@@ -7,6 +7,9 @@ import { ProfilePage } from "../presentation/pages/profile/ProfileHome"
 import { LoginPage } from "../presentation/pages/security/auth/LoginPage"
 import { EventoPage } from "../presentation/pages/eventos/EventosPage"
 import { MapPage } from "../presentation/pages/Map/MapPage"
+import { RegisterPage } from "../presentation/pages/security/auth/RegisterPage";
+import { IndexPage } from "../presentation/pages/home/IndexPage"
+
 
 
 //Private Route es un componente que protege las rutas que requieren autenticación tiene fallos por eso está comentado
@@ -16,8 +19,9 @@ export const AppRouter = () => {
         <div className="min-h-screen bg-gray-100">
             <Routes>
                 {/*<Route element={<PrivateRoute/>}>*/} 
+                <Route path="/" element={<HomePage />} />
                     <Route element={<Navbar />}>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/index" element={<IndexPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/eventos" element={<EventoPage />} />
                     <Route path="/mapa" element={<MapPage/>} />
@@ -25,6 +29,7 @@ export const AppRouter = () => {
                 {/* <</Route>> */}
                 <Route path="/auth">
                     <Route path="login" element={authenticated ? <Navigate to="/" replace/> : <LoginPage />} />
+                    <Route path="register"element={authenticated ? <Navigate to="/" replace /> : <RegisterPage />}/>
                 </Route>
             </Routes>
         </div>
