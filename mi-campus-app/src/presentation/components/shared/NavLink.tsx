@@ -13,7 +13,7 @@ export const NavLink = ({ icon, text, active = false, to }: Props) => {
         <Link
             to={to}
             className={`flex items-center px-3 py-2 text-sm font-LexendDeca-Medium text-decoration-none
-            ${active ? "bg-blue-700 text-white" : "text-blue-100 hover:bg-blue-500"}`} >
+            ${active ? "bg-yellow-500 text-white" : "text-white hover:bg-blue-500"}`} >
 
             {icon && (
                 <span className="mr-2">{icon}</span>

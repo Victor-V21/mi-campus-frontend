@@ -1,4 +1,4 @@
-import { Globe, Home, Menu, UserCircle, MapPin, MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { Globe, Home, Menu, UserCircle, MapPin, MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut, Settings2, MessageCircleCode } from "lucide-react";
 import { NavLink } from "../shared/NavLink";
 import { useState } from "react";
 import { MobileNavLink } from "../shared/MobileNavLink";
@@ -61,10 +61,10 @@ export const Navbar = () => {
                         <MobileNavLink to="/notification" active={isActive("/notification")} icon={<NotebookIcon size={18} />} text="Notificaciones" />
                         <MobileNavLink to="/perfil" active={isActive("/perfil")} icon={<UserCircle size={18} />} text="Perfil" />
                         <button
-                            type="button" 
+                            type="button"
                             onClick={logout}
                             className="w-full text-left flex items-center px-3 py-2 rounded-md text-base font-medium text-white hover:bg-blue-700">
-                            <LogOut size={18}/>
+                            <LogOut size={18} />
                             <span className="ml-2">Salir</span>
                         </button>
                     </div>
@@ -92,47 +92,53 @@ export const Navbar = () => {
 
                         {/* Navegación principal */}
                         <nav className="flex-1 overflow-y-auto py-2">
-                            <NavLink 
-                                to="/index" 
-                                active={isActive("/")} 
-                                text={isCollapsed ? "" : "Inicio"} 
+                            <NavLink
+                                to="/index"
+                                active={isActive("/")}
+                                text={isCollapsed ? "" : "Inicio"}
                                 icon={<Home size={20} />}
                             />
-                            <NavLink 
-                                to="/eventos" 
-                                active={isActive("/eventos")} 
-                                text={isCollapsed ? "" : "Eventos"} 
+                            <NavLink
+                                to="/chatbot"
+                                active={isActive("/chatbot")}
+                                text={isCollapsed ? "" : "PumindAI"}
+                                icon={<MessageCircleCode size={20} />}
+                            />
+                            <NavLink
+                                to="/eventos"
+                                active={isActive("/eventos")}
+                                text={isCollapsed ? "" : "Eventos"}
                                 icon={<Globe size={20} />}
                             />
-                            <NavLink 
-                                to="/mapa" 
-                                active={isActive("/mapa")} 
-                                text={isCollapsed ? "" : "Mapa"} 
+                            <NavLink
+                                to="/mapa"
+                                active={isActive("/mapa")}
+                                text={isCollapsed ? "" : "Mapa"}
                                 icon={<MapPin size={20} />}
                             />
-                            <NavLink 
-                                to="/notification" 
-                                active={isActive("/notification")} 
-                                text={isCollapsed ? "" : "Notificaciones"} 
+                            <NavLink
+                                to="/notification"
+                                active={isActive("/notification")}
+                                text={isCollapsed ? "" : "Notificaciones"}
                                 icon={<NotebookIcon size={20} />}
                             />
-                            <NavLink 
-                                to="/profile" 
-                                active={isActive("/profile")} 
-                                text={isCollapsed ? "" : "Perfil"} 
+                            <NavLink
+                                to="/profile"
+                                active={isActive("/profile")}
+                                text={isCollapsed ? "" : "Perfil"}
                                 icon={<UserCircle size={20} />}
                             />
                             <button
                                 type="button"
                                 onClick={logout}
-                                className="flex items-center px-3 py-2 text-sm font-LexendDeca-Medium text-decoration-none text-blue-100 hover:bg-blue-500"  
+                                className="flex items-center px-3 py-2 text-sm font-LexendDeca-Medium text-decoration-none text-blue-100 hover:bg-blue-500"
                             >
                                 <LogOut size={20} />
                                 {!isCollapsed && <span>Salir</span>}
                             </button>
                         </nav>
                     </div>
-                    
+
                     {/* Contenido principal */}
                     <div className="flex-1 bg-gray-100 overflow-y-auto">
                         <div className="p-4">
@@ -159,7 +165,7 @@ export const Navbar = () => {
                 <div className="p-4 pt-20 flex-1">
                     <Outlet />
                 </div>
-                
+
                 {/* Pie de página para móvil */}
                 <footer className="bg-blue-800 text-white py-3 px-4 text-center text-sm">
                     <div className="flex flex-col items-center">

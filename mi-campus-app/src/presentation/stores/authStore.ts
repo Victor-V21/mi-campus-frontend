@@ -21,40 +21,40 @@ export const useAuthStore = create<AuthStore>()((set) => ({
     errorMessage: undefined,
     authenticated: isTokenValid(storedToken),
     login: async (login: LoginModel) => {
-        set({errorMessage: undefined});
+        set({ errorMessage: undefined });
         const response = await loginAction(login);
 
-        if(response.status && response.data) {
+        if (response.status && response.data) {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("email", response.data.email);
 
-            set({token: response.data.token, email: response.data.email, authenticated: true});
+            set({ token: response.data.token, email: response.data.email, authenticated: true });
 
             return;
         }
 
-        set({errorMessage: response.message, authenticated: false});
+        set({ errorMessage: response.message, authenticated: false });
 
         return;
     },
     logout: () => {
         localStorage.removeItem("token");
         localStorage.removeItem("email");
-        set({token: undefined, email: undefined, authenticated: false});
+        set({ token: undefined, email: undefined, authenticated: false });
     }
 }))
 
 function isTokenValid(token?: string): boolean {
     if (!token) return false;
-    try{
+    try {
         const paylod = JSON.parse(atob(token.split('.')[1]))
-        if(!paylod.exp) return false;
+        if (!paylod.exp) return false;
 
         const now = Math.floor(Date.now() / 1000);
-        console.log({tokenExpirationTime: paylod.exp, currentTime: now, isValid: paylod.exp > now});
+        console.log({ tokenExpirationTime: paylod.exp, currentTime: now, isValid: paylod.exp > now });
 
         return paylod.exp > now;
-    } catch{
+    } catch {
         return false;
     }
 }
