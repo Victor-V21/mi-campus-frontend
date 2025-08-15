@@ -13,32 +13,32 @@ export const loginAction = async (login: LoginModel): Promise<ApiResponse<LoginR
         );
 
         return data;
-        
+
     } catch (error) {
         const apiError = error as AxiosError<ApiErrorResponse>;
 
         console.error(apiError);
 
-        if(apiError.response) {
-           // throw new Error(apiError.response.data.message);
-        return{
-            status: false,
-            message: apiError.response.data.message || "Error al iniciar sesion"
-        }
-        
+        if (apiError.response) {
+            // throw new Error(apiError.response.data.message);
+            return {
+                status: false,
+                message: apiError.response.data.message || "Error al iniciar sesión"
+            }
+
         } else if (apiError.request) {
-           // throw new Error('Error de conexión');
-        return{
-            status: false,
-            message: 'Error de conexión'
-        }
+            // throw new Error('Error de conexión');
+            return {
+                status: false,
+                message: 'Error de conexión'
+            }
         } else {
-           // throw new Error('Error desconocido')
-        return{
-            status: false,
-            message: 'Error desconocido'
+            // throw new Error('Error desconocido')
+            return {
+                status: false,
+                message: 'Error desconocido'
+            }
         }
-        }
-        
+
     }
 } 
