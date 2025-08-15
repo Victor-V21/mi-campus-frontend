@@ -1,139 +1,288 @@
-import { CalendarDays, Clock, MapPin, ArrowRight } from "lucide-react";
+// src/presentation/pages/eventos/EventoPage.tsx
+import { useEffect, useMemo, useState } from "react";
+import { ArrowRight, Plus, Pencil, Trash2, X } from "lucide-react";
 import { Title } from "../../components/shared/Title";
-import { useState } from "react";
+import type { PublicationTypeDto } from "../../../infrastructure/interfaces/publication-type.response";
+import type { PublicationTypeModel } from "../../../core/models/publication-types.model";
+import { getAllPublicationTypesAction } from "../../../core/actions/publication-types/get-all-publication-types.action";
+import { createPublicationTypeAction } from "../../../core/actions/publication-types/create-publication-type.action";
+import { editPublicationTypeAction } from "../../../core/actions/publication-types/edit-publication-type.action";
+import { deletePublicationTypeAction } from "../../../core/actions/publication-types/delete-publication-type.action";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { publicationTypeInitialValues, publicationTypeValidationSchema } from "../../../infrastructure/validations/publication-types.validation";
+
+// 🔧 Normaliza la respuesta, venga como venga
+function normalizeTypes(payload: any): PublicationTypeDto[] {
+  // Array directo
+  if (Array.isArray(payload)) return payload;
+
+  // ApiResponse<T> { status, message, data }
+  if (payload?.data && Array.isArray(payload.data)) return payload.data;
+
+  // Paginado común { items, total, ... }
+  if (Array.isArray(payload?.items)) return payload.items;
+
+  // Otras variantes frecuentes
+  if (Array.isArray(payload?.data?.items)) return payload.data.items;
+  if (Array.isArray(payload?.value)) return payload.value;
+  if (Array.isArray(payload?.data?.value)) return payload.data.value;
+
+  return [];
+}
 
 export const EventoPage = () => {
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  // listado
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState<string | null>(null);
+  const [types, setTypes] = useState<PublicationTypeDto[]>([]);
 
-  const events = [
-    {
-      id: 1,
-      title: "Charla de Inteligencia Artificial",
-      date: "2023-11-14",
-      time: "14:00 - 16:00",
-      location: "Edificio C1, Aula 302",
-      description:
-        "Conoce las últimas tendencias en IA aplicada a la educación universitaria",
-      category: "TECNOLOGÍA",
-    },
-    {
-      id: 2,
-      title: "Taller de Investigación Científica",
-      date: "2023-11-17",
-      time: "09:00 - 12:00",
-      location: "Biblioteca Central, Sala 4",
-      description:
-        "Aprende metodologías de investigación para tus proyectos académicos",
-      category: "ACADÉMICO",
-    },
-    {
-      id: 3,
-      title: "Feria de Empleo UNAH",
-      date: "2023-11-19",
-      time: "10:00 - 16:00",
-      location: "Plaza Central",
-      description:
-        "Conoce oportunidades laborales con las mejores empresas del país",
-      category: "EMPLEO",
-    },
-  ];
+  // modal CRUD
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<"create" | "edit">("create");
+  const [working, setWorking] = useState(false);
+  const [initialForm, setInitialForm] = useState<PublicationTypeModel>(publicationTypeInitialValues);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [generalError, setGeneralError] = useState<string | null>(null);
 
-  const filteredEvents = events.filter((event) => {
-    const matchesSearch =
-      event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
-  });
+  // Carga usando TU action
+  const load = async () => {
+    try {
+      setErr(null);
+      setLoading(true);
+
+      const res = await getAllPublicationTypesAction(); // <- devuelve ApiResponse<T> (según tu patrón)
+      // Log para ver forma real en consola
+      console.log("[publication-types] raw response:", res);
+
+      const list = normalizeTypes(res); // acepta ApiResponse o array
+      setTypes(list);
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "No se pudo cargar la información.");
+      setTypes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { load(); }, []);
+
+  // filtro cliente
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return (Array.isArray(types) ? types : []).filter((t) => {
+      const name = (t?.name ?? "").toLowerCase();
+      const desc = (t?.description ?? "").toLowerCase();
+      return !q || name.includes(q) || desc.includes(q);
+    });
+  }, [types, search]);
+
+  // ---- CRUD helpers ----
+  const openCreate = () => {
+    setMode("create");
+    setEditId(null);
+    setGeneralError(null);
+    setInitialForm({ ...publicationTypeInitialValues });
+    setOpen(true);
+  };
+
+  const openEdit = (t: PublicationTypeDto) => {
+    setMode("edit");
+    setEditId(String((t as any).id)); // ajusta si tu DTO usa otra clave
+    setGeneralError(null);
+    setInitialForm({
+      name: t.name ?? "",
+      description: t.description ?? "",
+    });
+    setOpen(true);
+  };
+
+  const onDelete = async (id: string) => {
+    if (!confirm("¿Eliminar este tipo de publicación?")) return;
+    setWorking(true);
+    try {
+      const del = await deletePublicationTypeAction(id); // throws si falla
+      console.log("[publication-types] delete response:", del);
+      await load();
+      alert("Tipo eliminado.");
+    } catch (e) {
+      alert(e instanceof Error ? e.message : "Error inesperado al eliminar.");
+    } finally {
+      setWorking(false);
+    }
+  };
 
   return (
     <div className="page-container">
       <Title text="Eventos Académicos" className="mb-8" />
 
-      {/* Buscador + filtros */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <div className="relative flex-1">
-          <input
-            type="text"
-            placeholder="Buscar eventos..."
-            className="event-search-input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-
-        <div className="event-filter-buttons flex flex-wrap gap-2">
+      {/* Toolbar */}
+      <div className="flex flex-col md:flex-row gap-3 mb-6">
+        <input
+          type="text"
+          placeholder="Buscar tipos de publicación..."
+          className="event-search-input flex-1"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className="flex gap-2">
+          <button onClick={load} className="event-details-button">Recargar</button>
           <button
-            onClick={() => setActiveFilter("all")}
-            className={activeFilter === "all" ? "active" : ""}
+            onClick={openCreate}
+            className="event-details-button"
+            style={{ display: "flex", alignItems: "center", gap: 6 }}
           >
-            Todos
-          </button>
-          <button
-            onClick={() => setActiveFilter("week")}
-            className={activeFilter === "week" ? "active" : ""}
-          >
-            Esta semana
-          </button>
-          <button
-            onClick={() => setActiveFilter("career")}
-            className={activeFilter === "career" ? "active" : ""}
-          >
-            Por carrera
+            <Plus size={16} /> Nuevo tipo
           </button>
         </div>
       </div>
 
-      {/* Lista de eventos */}
-      <div className="space-y-6">
-        {filteredEvents.map((event) => (
-          <div key={event.id} className="event-card">
-            <div className="mb-4 flex justify-between items-start">
-              <h3 className="event-title">{event.title}</h3>
-              <span className="event-category">{event.category}</span>
+      {/* Estados */}
+      {loading && <p>Cargando tipos…</p>}
+      {err && !loading && (
+        <div className="event-card" style={{ borderColor: "#fecaca" }}>
+          <p className="event-description" style={{ color: "#b91c1c" }}>{err}</p>
+        </div>
+      )}
+
+      {/* Lista */}
+      {!loading && !err && (
+        <>
+          {filtered.length === 0 ? (
+            <div className="event-card">
+              <p className="event-description">No hay tipos que coincidan con la búsqueda.</p>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2">
+              {filtered.map((t) => (
+                <article key={String((t as any).id)} className="event-card">
+                  <header className="mb-4 flex justify-between items-start">
+                    <h3 className="event-title">{t.name}</h3>
+                    <span className="event-category">TIPO</span>
+                  </header>
+
+                  <p className="event-description">{t.description ?? "Sin descripción"}</p>
+
+                  {/* Acciones */}
+                  <div className="mt-4 flex gap-2">
+                    <button
+                      className="event-details-button"
+                      style={{ background: "transparent", color: "var(--unah-blue)", border: "1px solid rgba(0,59,116,.2)", display: "flex", alignItems: "center", gap: 6 }}
+                      onClick={() => openEdit(t)}
+                    >
+                      <Pencil size={16} /> Editar
+                    </button>
+                    <button
+                      className="event-details-button"
+                      style={{ background: "transparent", color: "#b91c1c", border: "1px solid rgba(185,28,28,.3)", display: "flex", alignItems: "center", gap: 6 }}
+                      onClick={() => onDelete(String((t as any).id))}
+                      disabled={working}
+                    >
+                      <Trash2 size={16} /> Eliminar
+                    </button>
+                    <a
+                      href={`/publicaciones?typeId=${String((t as any).id)}`}
+                      className="event-details-button"
+                      style={{ display: "flex", alignItems: "center", gap: 6 }}
+                    >
+                      Ver publicaciones <ArrowRight size={16} />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Modal Formik + Yup */}
+      {open && (
+        <div
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.35)", display: "grid", placeItems: "center", zIndex: 50 }}
+          onClick={() => !working && setOpen(false)}
+        >
+          <div className="event-card" style={{ width: "100%", maxWidth: 560 }} onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="event-title">
+                {mode === "create" ? "Nuevo tipo de publicación" : "Editar tipo de publicación"}
+              </h3>
+              <button
+                onClick={() => !working && setOpen(false)}
+                className="event-details-button"
+                style={{ background: "transparent", border: "1px solid rgba(0,59,116,.2)" }}
+              >
+                <X size={16} />
+              </button>
             </div>
 
-            <p className="event-description">{event.description}</p>
+            <Formik<PublicationTypeModel>
+              enableReinitialize
+              initialValues={initialForm}
+              validationSchema={publicationTypeValidationSchema}
+              onSubmit={async (values, { setSubmitting }) => {
+                setGeneralError(null);
+                setWorking(true);
+                try {
+                  if (mode === "create") {
+                    const res = await createPublicationTypeAction(values);
+                    console.log("[publication-types] create response:", res);
+                    await load();
+                    setOpen(false);
+                    alert("Tipo creado.");
+                  } else {
+                    const id = editId!;
+                    const res = await editPublicationTypeAction(id, values);
+                    console.log("[publication-types] edit response:", res);
+                    await load();
+                    setOpen(false);
+                    alert("Tipo actualizado.");
+                  }
+                } catch (e) {
+                  setGeneralError(e instanceof Error ? e.message : "Error inesperado.");
+                } finally {
+                  setWorking(false);
+                  setSubmitting(false);
+                }
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Form>
+                  <div className="mb-3">
+                    <label className="event-info-title">Nombre</label>
+                    <Field name="name" as="input" className="event-search-input" placeholder="Ej. Evento, Anuncio, Comunidad" />
+                    <ErrorMessage name="name">
+                      {msg => <div style={{ color: "#b91c1c", fontSize: ".9rem", marginTop: 4 }}>{msg}</div>}
+                    </ErrorMessage>
+                  </div>
 
-            <div className="event-info">
-              <div className="event-icon">
-                <CalendarDays size={18} />
-                <div>
-                  <p className="event-info-title">Fecha</p>
-                  <p>
-                    {new Date(event.date).toLocaleDateString("es-ES", {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "long",
-                    })}
-                  </p>
-                </div>
-              </div>
+                  <div className="mb-3">
+                    <label className="event-info-title">Descripción (opcional)</label>
+                    <Field name="description" as="textarea" className="event-search-input" style={{ minHeight: 90 }} placeholder="Describe brevemente en qué se usará este tipo" />
+                    <ErrorMessage name="description">
+                      {msg => <div style={{ color: "#b91c1c", fontSize: ".9rem", marginTop: 4 }}>{msg}</div>}
+                    </ErrorMessage>
+                  </div>
 
-              <div className="event-icon">
-                <Clock size={18} />
-                <div>
-                  <p className="event-info-title">Horario</p>
-                  <p>{event.time}</p>
-                </div>
-              </div>
+                  {generalError && (
+                    <div className="event-card" style={{ borderColor: "#fecaca", background: "rgba(254,202,202,.25)" }}>
+                      <p className="event-description" style={{ color: "#b91c1c" }}>{generalError}</p>
+                    </div>
+                  )}
 
-              <div className="event-icon">
-                <MapPin size={18} />
-                <div>
-                  <p className="event-info-title">Ubicación</p>
-                  <p>{event.location}</p>
-                </div>
-              </div>
-            </div>
-
-            <button className="event-details-button flex items-center mt-6">
-              Ver detalles
-              <ArrowRight className="ml-2" size={16} />
-            </button>
+                  <div className="mt-4 flex justify-end gap-2">
+                    <button type="button" className="event-details-button" style={{ background: "transparent", color: "var(--unah-blue)", border: "1px solid rgba(0,59,116,.2)" }} onClick={() => setOpen(false)} disabled={working || isSubmitting}>
+                      Cancelar
+                    </button>
+                    <button type="submit" className="event-details-button" disabled={working || isSubmitting}>
+                      {working || isSubmitting ? "Guardando…" : mode === "create" ? "Crear" : "Guardar cambios"}
+                    </button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
