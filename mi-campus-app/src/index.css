@@ -1051,3 +1051,93 @@ footer a {
 .justify-between {
   justify-content: space-between;
 }
+
+/* ===== Publicaciones - estilo feed tipo Facebook (UI-only) ===== */
+.publications-feed { display:flex; flex-direction:column; gap:1rem; }
+
+.feed-header {
+  display:flex; align-items:flex-end; justify-content:space-between; gap:.75rem; margin-bottom:.25rem;
+}
+.feed-title {
+  font-family: var(--font-LexendDeca-Bold);
+  font-size: 1.75rem; line-height:1.2; color: var(--unah-blue); margin:0;
+}
+.feed-actions { display:flex; gap:.5rem; flex-wrap:wrap; }
+
+.post-composer {
+  padding: .75rem; display:flex; flex-direction:column; gap:.5rem;
+}
+.composer-row { display:flex; align-items:center; gap:.5rem; }
+.composer-avatar { width:42px; height:42px; border-radius:9999px; object-fit:cover; border:1px solid rgba(0,59,116,.15); }
+.composer-input {
+  flex:1; padding:.65rem .9rem; border-radius:9999px;
+  border:1px solid rgba(0,59,116,.20); background:#f5f7fa;
+  font-family: var(--font-LexendDeca-Regular);
+}
+.composer-input:focus { outline:none; border-color: var(--unah-blue); background:white; }
+.composer-actions { display:flex; gap:.5rem; flex-wrap:wrap; }
+.composer-chip{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.45rem .7rem; border-radius:.75rem;
+  border:1px solid rgba(0,59,116,.18); background:white; color: var(--unah-blue);
+  font-family: var(--font-LexendDeca-Medium); font-size:.9rem;
+}
+.chip-icon{ font-size:1rem; }
+
+.feed-list { display:flex; flex-direction:column; gap:.75rem; }
+
+/* Card del post */
+.post-card { overflow:hidden; }
+.post-header{
+  display:flex; align-items:center; justify-content:space-between; gap:.5rem;
+  padding: .75rem .75rem .25rem .75rem; border-bottom:1px solid rgba(0,59,116,.08);
+}
+.post-user{ display:flex; align-items:center; gap:.6rem; }
+.post-avatar{ width:44px; height:44px; border-radius:9999px; object-fit:cover; border:1px solid rgba(0,59,116,.15); }
+.post-user-row{ display:flex; align-items:center; gap:.5rem; }
+.post-user-name{ font-family: var(--font-LexendDeca-Medium); color: var(--unah-blue); }
+.post-pill{
+  display:inline-block; font-size:.7rem; font-weight:600; padding:.15rem .45rem;
+  background: var(--unah-yellow); color:white; border-radius:.5rem; white-space:nowrap;
+}
+.post-meta{ color:#6b7280; font-size:.8rem; display:flex; align-items:center; gap:.45rem; }
+.post-menu{
+  background:transparent; border:none; font-size:1.3rem; line-height:1; color:#6b7280; cursor:pointer;
+}
+
+.post-text{ padding:.6rem .75rem; color:#374151; line-height:1.5; }
+.post-media.single{ padding: 0; }
+.post-media.grid{
+  display:grid; gap:2px; grid-template-columns: repeat(2, 1fr);
+}
+.post-img{ width:100%; max-height:520px; object-fit:cover; display:block; }
+
+.post-stats{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: .5rem .75rem; color:#6b7280; font-size:.88rem; border-top:1px solid rgba(0,59,116,.08);
+}
+.post-stats .likes{ display:flex; align-items:center; gap:.35rem; }
+.post-stats .counts{ display:flex; align-items:center; gap:.45rem; }
+.dot{ width:3px; height:3px; background:#9ca3af; border-radius:50%; display:inline-block; }
+
+.post-actions{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:.25rem;
+  border-top:1px solid rgba(0,59,116,.08);
+}
+.post-action{
+  background:transparent; border:none; padding:.55rem .75rem; cursor:pointer;
+  font-family: var(--font-LexendDeca-Medium); color:#374151;
+}
+.post-action:hover{ background:#f7fafc; }
+.post-action:active{ background:#eef2f7; }
+
+.post-comment-box{
+  display:flex; align-items:center; gap:.5rem; padding:.6rem .75rem; border-top:1px solid rgba(0,59,116,.08);
+}
+.comment-avatar{ width:36px; height:36px; border-radius:9999px; object-fit:cover; border:1px solid rgba(0,59,116,.15); }
+.comment-input{
+  flex:1; padding:.55rem .9rem; border-radius:9999px; border:1px solid rgba(0,59,116,.20); background:#f5f7fa;
+}
+.comment-input:focus{ outline:none; border-color: var(--unah-blue); background:white; }
+
+.feed-pagination{ display:flex; gap:.5rem; justify-content:center; margin-top:.25rem; }

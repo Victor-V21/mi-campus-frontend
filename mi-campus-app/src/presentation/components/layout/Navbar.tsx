@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Globe, Home, Menu, UserCircle,  MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut,  Box } from "lucide-react";
+=======
+import { Globe, Home, Menu, UserCircle,  MessageCircleIcon, NotebookIcon, ChevronLeft, ChevronRight, LogOut, Box } from "lucide-react";
+>>>>>>> homafrontend
 import { NavLink } from "../shared/NavLink";
 import { useState } from "react";
 import { MobileNavLink } from "../shared/MobileNavLink";
@@ -105,9 +109,15 @@ export const Navbar = () => {
                                 icon={<Globe size={20} />}
                             />
                             <NavLink 
+<<<<<<< HEAD
                                 to="/publicaciones" 
                                 active={isActive("/publication")} 
                                 text={isCollapsed ? "" : "Publicaciones"} 
+=======
+                                to="/publication" 
+                                active={isActive("/publication")} 
+                                text={isCollapsed ? "" : "Publicationes"} 
+>>>>>>> homafrontend
                                 icon={<Box size={20} />}
                             />
                             <NavLink 
