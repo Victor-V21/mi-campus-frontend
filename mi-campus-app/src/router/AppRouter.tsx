@@ -10,7 +10,8 @@ import { MapPage } from "../presentation/pages/Map/MapPage"
 import { RegisterPage } from "../presentation/pages/security/auth/RegisterPage";
 import { IndexPage } from "../presentation/pages/home/IndexPage"
 import { GeminiChatbot } from "../presentation/pages/Chatbot/ChatBotPage"
-import { VerifyEmailPage } from "../presentation/pages/security/auth/VerifyImagePage"
+import { VerifyEmailPage } from "../presentation/pages/security/auth/VerifyEmailPage"
+import AdminCampusesPage from "../presentation/pages/AdminPanel/AdminCampusesPage"
 
 //Private Route es un componente que protege las rutas que requieren autenticación tiene fallos por eso está comentado
 export const AppRouter = () => {
@@ -29,16 +30,16 @@ export const AppRouter = () => {
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/eventos" element={<EventoPage />} />
                         <Route path="/publication" element={<MapPage />} />
-                        <Route path="/auth/verify-email" element={<VerifyEmailPage />} />
+                        <Route path="*" element={<AdminCampusesPage />}></Route>
                     </Route>
                     {/*Auth de login y registro */}
                 </Route>
                 <Route path="/auth">
                     <Route path="login" element={authenticated ? <Navigate to="/index" replace /> : <LoginPage />} />
                     <Route path="register" element={authenticated ? <Navigate to="/index" replace /> : <RegisterPage />} />
+                    <Route path="/auth/verify-email" element={<VerifyEmailPage />} />
                 </Route>
             </Routes>
         </div>
     )
 }
-

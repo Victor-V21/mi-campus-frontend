@@ -128,6 +128,12 @@ export const Navbar = () => {
                                 text={isCollapsed ? "" : "Perfil"}
                                 icon={<UserCircle size={20} />}
                             />
+                            <NavLink
+                                to="/superuser-settings"
+                                active={isActive("/superuser-setting")}
+                                text={isCollapsed ? "" : "Panel de administrador"}
+                                icon={<Settings2 size={20} />}
+                            />
                             <button
                                 type="button"
                                 onClick={logout}
