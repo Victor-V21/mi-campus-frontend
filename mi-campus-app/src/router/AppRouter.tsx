@@ -10,8 +10,7 @@ import { MapPage } from "../presentation/pages/Map/MapPage"
 import { RegisterPage } from "../presentation/pages/security/auth/RegisterPage";
 import { IndexPage } from "../presentation/pages/home/IndexPage"
 import { GeminiChatbot } from "../presentation/pages/Chatbot/ChatBotPage"
-import { VerifyEmailPage } from "../presentation/pages/security/auth/VerifyEmailPage"
-import { AdminCampusesPage } from "../presentation/pages/AdminPanel/AdminCampusesPage"
+import { VerifyEmailPage } from "../presentation/pages/security/auth/VerifyImagePage"
 
 //Private Route es un componente que protege las rutas que requieren autenticación tiene fallos por eso está comentado
 export const AppRouter = () => {
@@ -43,3 +42,4 @@ export const AppRouter = () => {
         </div>
     )
 }
+
